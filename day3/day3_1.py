@@ -2,8 +2,8 @@
 import string, math 
 letters = list(string.ascii_letters)
 #Creating a dictionary for the priorities
-keys = range(1, 53)
-priorities = dict(zip(keys, letters))
+values = range(1, 53)
+priorities = dict(zip(letters, values))
 #Sum of the values of the properties found
 sum = 0
 #Opening txt with input
@@ -12,10 +12,14 @@ with open('day3_1.txt', 'r', encoding="utf-8") as f:
     for line in lines:
         #line.strip to not count the newline character
         line.strip()
-        for part_a in range(0, math.floor(len(line)/2)):
-            for part_b in range(math.floor(len(line)/2)+1, len(line)):
-                if part_a == part_b:
-                    #TODO
-                    sum += {i for i in priorities if priorities[i]==part_a}
+        #Find half of the line length
+        half = len(line) // 2
+        #Check if the letters from the two compartment are equal or not
+        rucksack_a = line[:half]
+        rucksack_b = line[half:]
+        for letter in rucksack_a:
+            if letter in rucksack_b:
+                sum += priorities.get(letter)
+                break
     print(sum)
         
