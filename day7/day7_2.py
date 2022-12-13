@@ -1,3 +1,5 @@
+#Thanks to feline_amenities on reddit for the solution.
+
 from collections import defaultdict
 import re
 
@@ -45,3 +47,15 @@ for key, value in sizes.items():
 	
 print("The sum of the total sizes of the directories with a size of at most 10^5 is: %d" % amount)
 print("The sum of the total sizes of the directories is: %d" % sizes["root"])
+
+# Part 2
+
+total_disk_space = 7*10**7
+desired_free_disk_space = 3*10**7
+
+free_space = total_disk_space - sizes["root"]
+needed_for_update = desired_free_disk_space - free_space
+
+s = [s for s in sorted(sizes.values()) if s >= needed_for_update]	
+
+print("The smallest directory that, if deleted, would free up enough space on the filesystem to run the update has the total size: %d" % int(s[0]))
